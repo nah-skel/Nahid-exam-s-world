@@ -7,6 +7,7 @@ How to run locally:
 2. Open `index.html` in your browser.
 
 Notes:
-- Admin password: `admin123` (change in `script.js` if needed).
+- Admin password: `nahid23` (change in `script.js` if needed).
 - Attempts stored in browser localStorage (clearing storage or using another browser/device allows retaking).
+
 - To host: push these files to a GitHub repo and enable GitHub Pages (Settings → Pages → branch: main, folder: /).
