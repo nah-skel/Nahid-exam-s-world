@@ -10,7 +10,7 @@ const QUESTIONS = [
 ];
 
 const STORAGE_KEY = "nahid_exam_attempts_v1";
-const ADMIN_PASS = "admin123";
+const ADMIN_PASS = "nahid23";
 
 function loadAttempts(){
   try{
@@ -172,4 +172,5 @@ adminBtn.addEventListener("click", () => {
     allAttemptsDiv.appendChild(item);
   });
   allAttemptsDiv.classList.remove("hidden");
+
 });
