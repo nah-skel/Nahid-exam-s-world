@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Nahid Exam's World</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Nahid Exam's World</h1>
+      <p class="lead">আপনার আইডি দিয়ে পরীক্ষা শুরু করুন — একই আইডি দিয়ে একাধিকবার পরীক্ষা করা যাবে না।</p>
+    </header>
+
+    <section id="entry">
+      <label for="studentId">আইডি (নাম / রোল নম্বর):</label>
+      <input id="studentId" type="text" placeholder="আপনার আইডি লিখুন" />
+      <button id="startBtn">পরীক্ষা শুরু করুন</button>
+      <p id="entryMsg" class="msg"></p>
+    </section>
+
+    <section id="quizSection" class="hidden">
+      <form id="quizForm">
+        <div id="questions"></div>
+        <div class="actions">
+          <button type="submit" id="submitBtn">জমা দিন</button>
+        </div>
+      </form>
+    </section>
+
+    <section id="resultSection" class="hidden">
+      <h2>আপনার ফলাফল</h2>
+      <p id="scoreText"></p>
+      <button id="doneBtn">সমাপ্ত</button>
+    </section>
+
+    <section id="viewSection">
+      <h3>ফলাফল দেখা</h3>
+      <input id="viewId" type="text" placeholder="আপনার আইডি লিখুন" />
+      <button id="viewBtn">ফল দেখুন</button>
+      <p id="viewMsg" class="msg"></p>
+    </section>
+
+    <section id="adminSection">
+      <h3>Admin: সব পরীক্ষার রেকর্ড</h3>
+      <input id="adminPass" type="password" placeholder="Admin পাসওয়ার্ড" />
+      <button id="adminBtn">দেখুন</button>
+      <div id="allAttempts" class="attempts hidden"></div>
+    </section>
+
+    <footer>
+      <small>Local only demo — সার্ভার ভিত্তিক সংরক্ষণ চাইলে বলুন (Firebase/Node+DB)।</small>
+    </footer>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
