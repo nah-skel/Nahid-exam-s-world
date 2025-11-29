@@ -4,6 +4,8 @@
   --accent:#0ea5e9;
   --muted:#555;
   --danger:#dc2626;
+  --warn:#d97706;
+  --ok:#16a34a;
 }
 *{box-sizing:border-box}
 body{
@@ -24,7 +26,7 @@ header h1{ margin:0 0 6px 0; color:var(--accent) }
 .lead{ margin:0 0 12px 0; color:var(--muted) }
 
 label{ display:block; margin-bottom:6px; font-weight:600 }
-input[type="text"], input[type="password"]{
+input[type="text"], input[type="password"], input[type="number"]{
   padding:10px;
   width:100%;
   border:1px solid #e6eef8;
@@ -39,9 +41,30 @@ button{
   border-radius:8px;
   cursor:pointer;
 }
+button.danger{ background:var(--danger); }
 .msg{ color:var(--danger); margin-top:6px }
 
+.note{ color:var(--muted); margin:6px 0 10px 0; font-weight:600; }
+
 .hidden{ display:none }
+
+.quiz-top{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:12px;
+}
+.timer{
+  font-weight:700;
+  padding:6px 10px;
+  border-radius:8px;
+  background:#eef6ff;
+  color:var(--accent);
+}
+.timer.warn{ background:#fff4e6; color:var(--warn); }
+.timer.done{ background:#ffeef0; color:var(--danger); }
+
+.current-id{ color:var(--muted); font-weight:600 }
 
 .question-card{
   border:1px solid #eef2f6;
@@ -66,4 +89,11 @@ button{
 .attempt-item{ padding:8px; border-bottom:1px solid #eee }
 .attempt-item:last-child{ border-bottom:none }
 
+.admin-controls{
+  margin-top:12px;
+  padding:10px;
+  border:1px solid #e6eef8;
+  border-radius:8px;
+  background:#fbfdff;
+}
 footer{ margin-top:14px; color:var(--muted); font-size:13px }
