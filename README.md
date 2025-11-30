@@ -1,13 +1,32 @@
 # Nahid Exam's World
 
-Simple frontend-only exam site.
+আপনি যা পাবেন
+- Admin প্যানেল থেকে প্রশ্ন যোগ/সম্পাদনা/মুছে ফেলার সুবিধা।
+- Admin দ্বারা ডিফল্ট সময়সীমা সেট করা যাবে (মিনিটে) — শিক্ষার্থীরা সেই সময়েই পরীক্ষা দেবে, পরিবর্তন করতে পারবে না।
+- Admin টগল করে পরীক্ষার পরে শিক্ষার্থীদের উত্তর দেখার অনুমতি দিতে পারবেন।
+- ছাত্ররা পরীক্ষার পর স্কোর ও (Admin অনুমতি থাকলে) প্রশ্নগুলোর সঠিক উত্তর দেখবে।
+- Admin থেকে সব রেকর্ড CSV এক্সপোর্ট ও সব রেকর্ড মুছার অপশন আছে।
+- Frontend-only (localStorage) — production‑ready security/central storageের জন্য ব্যাকএন্ড লাগবে।
 
-How to run locally:
-1. Put `index.html`, `styles.css`, `script.js` in the same folder.
-2. Open `index.html` in your browser.
+কীভাবে ব্যবহার করবেন (লোকাল)
+1. তিনটি ফাইল একই ফোল্ডারে রাখুন: index.html, styles.css, script.js (এছাড়াও README.md)
+2. ব্রাউজারে index.html খুলুন।
+3. Admin:
+   - Admin প্যানেলে পাসওয়ার্ড দিন (ডিফল্ট: `admin123`) → লগইন
+   - প্রশ্ন যোগ করতে ফরম ব্যবহার করুন (কমপক্ষে ২টি অপশন দিন)।
+   - ডিফল্ট সময়সীমা সেট করুন ও "অ্যারনস শো" টগল করুন যাতে পরীক্ষার পরে শিক্ষার্থী উত্তর দেখতে পায়।
+   - চাইলে Export অথবা Clear all ব্যবহার করুন।
+4. Student:
+   - Student প্যানেলে আইডি দিন → Start.
+   - পরীক্ষায় উত্তর দিন এবং সময়ের মধ্যে Submit করুন (টাইমার শেষ হলে auto-submit হবে)।
+   - Submit করার পর স্কোর দেখানো হবে; admin অনুমতি থাকলে বিস্তারিত উত্তরও দেখবে।
 
-Notes:
-- Admin password: `nahid23` (change in `script.js` if needed).
-- Attempts stored in browser localStorage (clearing storage or using another browser/device allows retaking).
+নোট ও নিরাপত্তা
+- Admin পাসওয়ার্ড ও সব ডাটা ক্লায়েন্ট‑সাইডে আছে (localStorage ও JavaScript)। প্রোডাকশনে নিরাপত্তার জন্য সার্ভার‑সাইড authentication, HTTPS, এবং ডাটাবেস ব্যবহার করুন।
+- localStorage মুছে দিলে রেকর্ড মুছে যাবে। একাধিক ডিভাইস/ব্রাউজারে একই আইডি পুনরায় পরীক্ষা দিতে পারবেন যদি localStorage আলাদা থাকে — সার্ভার‑বেইজড সলিউশন এড়াবে তা।
 
-- To host: push these files to a GitHub repo and enable GitHub Pages (Settings → Pages → branch: main, folder: /).
+চাইলে আমি পরবর্তীভাবে:
+- এই সিস্টেমকে Node.js + Express + SQLite/MongoDB অথবা Firebase এ সংযোগ করে সার্ভার‑সাইড অডেনটিকেশন এবং কেন্দ্রীয় ডাটাবেস যোগ করে দিতে পারি — এতে student দ্বারা কুকি/লোকালস্টোরেজ মুছলে পুনরায় পরীক্ষা দেয়া রোধ হবে।
+- অথবা UI-তে আরো সুন্দরতা/রিস্পন্সিভিটি, প্রশ্নে ইমেজ ও টাইমবাউন্ড per-question (প্রশ্ন অনুরূপ সময়ে) যোগ করতে পারি।
+
+আপনি বলুন — আমি কি এখন এই ফাইলগুলো রিপ্লেস করে GitHub তে আপলোড করার জন্য কপিপেস্টযোগ্য git/gh কমান্ড দেব? অথবা আপনি লোকালি ফাইলগুলো বদলে পরীক্ষা করে কোনো ইস্যু দিলেই আমি ঠিক করে দেব।
