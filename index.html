@@ -7,128 +7,81 @@
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <div class="app">
-    <header class="topbar">
-      <div class="brand">
-        <h1>Nahid Exam's World</h1>
-        <p class="subtitle">স্টুডেন্টদের জন্য অনলাইন পরীক্ষা — Admin দিয়ে প্রশ্ন ও সময় নিয়ন্ত্রণ করুন।</p>
-      </div>
-      <div class="meta">
-        <div class="small">Admin protected · Local demo</div>
-      </div>
+  <div class="container">
+    <header>
+      <h1>Nahid Exam's World</h1>
+      <p class="lead">আপনার আইডি দিয়ে পরীক্ষা শুরু করুন — একই আইডি দিয়ে একাধিকবার পরীক্ষা করা যাবে না।</p>
     </header>
 
-    <main class="main">
-      <section class="card" id="studentCard">
-        <h2>শিক্ষার্থী ইন্টারফেস</h2>
+    <section id="entry">
+      <label for="studentId">আইডি (নাম / রোল নম্বর):</label>
+      <input id="studentId" type="text" placeholder="আপনার আইডি লিখুন" />
 
-        <div id="entry">
-          <label for="studentId">আইডি (নাম / রোল নম্বর)</label>
-          <input id="studentId" type="text" placeholder="আপনার আইডি লিখুন" />
+      <p class="note">পরীক্ষার সময়সীমা: <span id="currentDefaultTime">--</span> মিনিট (Admin দ্বারা নিয়ন্ত্রিত)</p>
 
-          <p class="note">পরীক্ষার সময়সীমা (মিনিট): <strong id="currentDefaultTime">--</strong></p>
+      <button id="startBtn">পরীক্ষা শুরু করুন</button>
+      <p id="entryMsg" class="msg"></p>
+    </section>
 
-          <div class="row">
-            <button id="startBtn" class="btn primary">পরীক্ষা শুরু করুন</button>
-            <button id="viewBtnResult" class="btn ghost">নিজের ফলাফল দেখুন</button>
-          </div>
-          <p id="entryMsg" class="msg"></p>
+    <section id="quizSection" class="hidden">
+      <div class="quiz-top">
+        <div id="timer" class="timer" aria-live="polite">সময়: 00:00</div>
+        <div id="currentId" class="current-id"></div>
+      </div>
+
+      <form id="quizForm">
+        <div id="questions"></div>
+        <div class="actions">
+          <button type="submit" id="submitBtn">জমা দিন</button>
+        </div>
+      </form>
+    </section>
+
+    <section id="resultSection" class="hidden">
+      <h2>আপনার ফলাফল</h2>
+      <p id="scoreText"></p>
+      <button id="doneBtn">সমাপ্ত</button>
+    </section>
+
+    <section id="viewSection">
+      <h3>ফলাফল দেখা</h3>
+      <input id="viewId" type="text" placeholder="আপনার আইডি লিখুন" />
+      <button id="viewBtn">ফল দেখুন</button>
+      <p id="viewMsg" class="msg"></p>
+    </section>
+
+    <section id="adminSection">
+      <h3>Admin: সব পরীক্ষার রেকর্ড</h3>
+
+      <div class="admin-login">
+        <input id="adminPass" type="password" placeholder="Admin পাসওয়ার্ড" />
+        <button id="adminBtn">লগইন / দেখুন</button>
+      </div>
+
+      <div id="adminControls" class="admin-controls hidden" aria-hidden="true">
+        <h4>Admin Controls</h4>
+
+        <label for="defaultTimeInput">ডিফল্ট সময়সীমা (মিনিট):</label>
+        <input id="defaultTimeInput" type="number" min="1" max="180" />
+        <button id="setDefaultTimeBtn">সেট করুন</button>
+
+        <div style="margin-top:10px;">
+          <button id="clearAllBtn" class="danger">সব রেকর্ড মুছুন</button>
+          <button id="exportBtn">Export CSV</button>
+          <!-- Only after admin login you can view questions -->
+          <button id="showQuestionsBtn" class="small-btn" title="Show questions - admin only">Show Questions</button>
         </div>
 
-        <div id="quizSection" class="hidden">
-          <div class="quiz-top">
-            <div id="currentId" class="current-id"></div>
-            <div id="timer" class="timer" aria-live="polite">সময়: 00:00</div>
-          </div>
-
-          <form id="quizForm" class="questions-list"></form>
-
-          <div class="row">
-            <button id="submitBtn" class="btn success">জমা দিন</button>
-            <button id="cancelBtn" class="btn ghost">বাতিল</button>
-          </div>
+        <div id="adminQuestions" class="attempts hidden" aria-hidden="true" style="margin-top:12px;">
+          <!-- Questions list for admin will be injected here after correct password -->
         </div>
+      </div>
 
-        <div id="resultSection" class="hidden">
-          <h3>আপনার ফলাফল</h3>
-          <p id="scoreText" class="bigscore"></p>
+      <div id="allAttempts" class="attempts hidden" aria-hidden="true"></div>
+    </section>
 
-          <div id="detailedAnswers" class="answers hidden">
-            <h4>প্রশ্নগুলো ও উত্তর</h4>
-            <div id="answersList"></div>
-          </div>
-
-          <div class="row">
-            <button id="doneBtn" class="btn">সমাপ্ত</button>
-          </div>
-        </div>
-      </section>
-
-      <section class="card" id="adminCard">
-        <h2>Admin প্যানেল</h2>
-
-        <div class="admin-login">
-          <label for="adminPass">Admin পাসওয়ার্ড</label>
-          <input id="adminPass" type="password" placeholder="পাসওয়ার্ড দিন" />
-          <div class="row">
-            <button id="adminBtn" class="btn primary">লগইন / দেখুন</button>
-            <button id="logoutAdminBtn" class="btn ghost hidden">লগআউট</button>
-          </div>
-        </div>
-
-        <div id="adminControls" class="hidden admin-controls">
-          <h3>প্রশ্ন ব্যবস্থাপনা</h3>
-
-          <form id="addQuestionForm" class="small-form">
-            <label>প্রশ্ন</label>
-            <input id="q_text" type="text" placeholder="প্রশ্ন লিখুন" required />
-
-            <div class="opts">
-              <label>অপশন ১</label>
-              <input id="q_o0" type="text" placeholder="অপশন ১" required />
-              <label>অপশন ২</label>
-              <input id="q_o1" type="text" placeholder="অপশন ২" required />
-              <label>অপশন ৩</label>
-              <input id="q_o2" type="text" placeholder="অপশন ৩" />
-              <label>অপশন ৪</label>
-              <input id="q_o3" type="text" placeholder="অপশন ৪" />
-            </div>
-
-            <label>সঠিক অপশন (১-৪)</label>
-            <input id="q_ans" type="number" min="1" max="4" value="2" />
-
-            <div class="row">
-              <button id="addQBtn" class="btn success">প্রশ্ন যোগ করুন</button>
-              <button id="clearQFormBtn" class="btn ghost">ফর্ম পরিষ্কার</button>
-            </div>
-          </form>
-
-          <h4>সেভ করা প্রশ্নসমূহ</h4>
-          <div id="questionList" class="q-list"></div>
-
-          <h3>সাধারণ সেটিংস</h3>
-          <label>ডিফল্ট সময়সীমা (মিনিট)</label>
-          <input id="defaultTimeInput" type="number" min="1" max="180" />
-
-          <label class="inline">
-            <input id="allowShowAnswers" type="checkbox" /> পরীক্ষার পরে শিক্ষার্থী উত্তর দেখতে পারবে
-          </label>
-
-          <div class="row" style="margin-top:8px;">
-            <button id="setDefaultTimeBtn" class="btn primary">সেট করুন</button>
-            <button id="exportBtn" class="btn">Export CSV</button>
-            <button id="clearAllBtn" class="btn danger">সব রেকর্ড মুছুন</button>
-          </div>
-
-          <div style="margin-top:12px;">
-            <small class="muted">নোট: এই demo-তে admin পাসওয়ার্ড ক্লায়েন্ট‑সাইডে আছে। প্রোডাকশনে ব্যাকএন্ড দিয়ে নিরাপদ করবেন।</small>
-          </div>
-        </div>
-      </section>
-    </main>
-
-    <footer class="footer">
-      <small>© Nahid Exam's World — আপনার প্রয়োজন মোতাবেক আমি আরো ফিচার যোগ করে দেব।</small>
+    <footer>
+      <small>প্রশ্ন/পরিবর্তন বা সাহায্যের জন্য যোগাযোগ করুন।</small>
     </footer>
   </div>
 
